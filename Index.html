@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Link | Activate Device</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background-color: #f0f4f8; color: #333; }
+        
+        /* 2cm Blue Header */
+        .header { background: #007bff; height: 75px; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
+        .logo { color: white; font-size: 24px; font-weight: bold; display: flex; align-items: center; gap: 10px; }
+        
+        .container { max-width: 380px; margin: 40px auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center; }
+        
+        h2 { font-size: 22px; margin-bottom: 10px; color: #007bff; }
+        p { font-size: 14px; color: #666; margin-bottom: 25px; }
+
+        .input-group { text-align: left; margin-bottom: 15px; }
+        label { font-size: 12px; font-weight: bold; color: #007bff; margin-left: 5px; }
+        input { width: 100%; padding: 14px; margin-top: 5px; border: 1.5px solid #e1e8ed; border-radius: 12px; box-sizing: border-box; outline: none; font-size: 16px; transition: 0.3s; }
+        input:focus { border-color: #007bff; box-shadow: 0 0 8px rgba(0,123,255,0.2); }
+        
+        .btn-action { width: 100%; padding: 15px; background: #007bff; color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 12px rgba(0,123,255,0.3); }
+        
+        /* Success Animation */
+        #success-screen { display: none; }
+        .checkmark-circle { width: 80px; height: 80px; border-radius: 50%; background: #28a745; color: white; line-height: 80px; font-size: 40px; margin: 0 auto 20px; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="logo">☁️ Cloud Link</div>
+</div>
+
+<div class="container">
+    <div id="step-1">
+        <h2>Activate Device</h2>
+        <p>Enter your serial number to get started</p>
+        
+        <div class="input-group">
+            <label>SERIAL NUMBER (SN)</label>
+            <input type="text" id="sn-field" placeholder="Ex: A47HC7UFT7JVT6">
+        </div>
+        
+        <div class="input-group">
+            <label>ADMIN EMAIL</label>
+            <input type="email" id="email-field" placeholder="example@mail.com">
+        </div>
+        
+        <button class="btn-action" onclick="showStep2()">ENTER</button>
+    </div>
+
+    <div id="step-2" style="display:none;">
+        <h2>Security Setup</h2>
+        <p>Create a strong password for your account</p>
+        
+        <div class="input-group">
+            <label>NEW PASSWORD</label>
+            <input type="password" id="pass1" placeholder="••••••••">
+        </div>
+        
+        <div class="input-group">
+            <label>CONFIRM PASSWORD</label>
+            <input type="password" id="pass2" placeholder="••••••••">
+        </div>
+        
+        <button class="btn-action" onclick="completeActivation()">SIGN IN</button>
+    </div>
+
+    <div id="success-screen">
+        <div class="checkmark-circle">✓</div>
+        <h2>Activated!</h2>
+        <p>Cloud Link has been successfully set up on your device.</p>
+        <button class="btn-action" onclick="location.reload()">OPEN DASHBOARD</button>
+    </div>
+</div>
+
+<script>
+    function showStep2() {
+        const sn = document.getElementById('sn-field').value;
+        const email = document.getElementById('email-field').value;
+
+        if(sn === "" || email === "") {
+            alert("Please fill all fields!");
+            return;
+        }
+
+        document.getElementById('step-1').style.display = 'none';
+        document.getElementById('step-2').style.display = 'block';
+    }
+
+    function completeActivation() {
+        const p1 = document.getElementById('pass1').value;
+        const p2 = document.getElementById('pass2').value;
+
+        if(p1 === p2 && p1 !== "") {
+            document.getElementById('step-2').style.display = 'none';
+            document.getElementById('success-screen').style.display = 'block';
+        } else {
+            alert("Passwords do not match!");
+        }
+    }
+</script>
+
+</body>
+</html>
